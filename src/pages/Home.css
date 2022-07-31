@@ -1,0 +1,31 @@
+.top {
+    float: top;
+    border: 1px solid white;
+    height: 10vh;
+    color: white;
+}
+
+.side {
+    color: white;
+    height: 40vh;
+    width: 30vw;
+}
+
+
+.bottom {
+    position: fixed;
+    border: 1px solid white;
+    color: white;
+    height: 10vh;
+    bottom: 0;
+    width: 99vw;
+}
+
+.middle {
+    position: fixed;
+    color: white;
+    height: 10vh;
+    bottom: 40vh;
+    width: 60vw;
+    transform: translateX(33%);
+}
