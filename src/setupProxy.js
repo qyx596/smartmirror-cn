@@ -24,6 +24,14 @@ const tenAPIProxy = {
     }
 }
 
+const rssProxy = {
+    target: "https://blog.ethereum.org",
+    changeOrigin: true,
+    pathRewrite: {
+        "/rss": ""
+    }
+}
+
 module.exports = function(app) {
     app.use(
         '/covid',
@@ -37,4 +45,8 @@ module.exports = function(app) {
         '/ten',
         createProxyMiddleware(tenAPIProxy)
     );
+    app.use(
+        '/rss',
+        createProxyMiddleware(rssProxy)
+    )
 };

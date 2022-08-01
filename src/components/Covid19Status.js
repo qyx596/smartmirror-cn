@@ -75,6 +75,7 @@ class Covid19Status extends Component {
         return (
             <div>
                 <div style={{marginBottom: "6px", borderBottomStyle: "solid", borderBottomColor: "gray", borderBottomWidth: "1px", paddingBottom: "4px"}}>
+                    <Icon style={{display: "inline", verticalAlign: "middle", paddingBottom: "0.2em"}}>coronavirus</Icon>
                     <b style={{fontSize: "1.3em"}}>全国疫情数据</b>
                 </div>
                 {this.state.inLocal === 0 ? null
@@ -83,7 +84,7 @@ class Covid19Status extends Component {
                         <div style={{borderBottomWidth: "1px", borderBottomStyle: "solid", borderBottomColor: "gray", marginBottom: "3px"}}>
                             <div style={{display: "inline-block"}}>
                                 <Icon style={{color: "#FFC300", float: "left"}}>warning</Icon>
-                                <b style={{float: "left"}}>福建现存确诊: {this.state.inLocal}</b>
+                                <b style={{float: "left", paddingTop: "0.2em"}}>福建现存确诊: {this.state.inLocal}</b>
                             </div>
                         </div>
                     </Fade>

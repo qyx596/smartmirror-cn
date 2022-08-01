@@ -1,6 +1,16 @@
 import React, {Component} from "react";
 import axios from "axios";
-import {List} from "@mui/material";
+import {
+    CircularProgress,
+    Divider,
+    List,
+    ListItem,
+    ListItemText, Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer, TableRow
+} from "@mui/material";
 
 class Hot extends Component {
     constructor(props) {
@@ -12,7 +22,6 @@ class Hot extends Component {
     freshHot() {
         axios.get("/ten/resou", {}).then(
             res => {
-                console.log(res)
                 this.setState({
                     success: true,
                     updateTime: new Date(),
@@ -32,10 +41,24 @@ class Hot extends Component {
                 <div style={{borderBottomStyle: "solid", borderBottomColor: "gray", borderBottomWidth: "1px"}}>
                     <b style={{fontSize: "1.3em"}}>微博热搜</b>
                 </div>
-                <div>
-                    <List disablePadding>
+                <div style={{textAlign: "center", marginTop: "0.6em"}}>
+                    {!this.state.success ? <CircularProgress color="inherit"/> :
+                        <TableContainer>
+                            <Table size="small">
+                                    <TableBody>
+                                        {this.state.data.map((item) => (
+                                            <TableRow>
+                                                <TableCell align={"center"} sx={{color: "white"}}>
+                                                    {"#" + item.name + "#"}
+                                                </TableCell>
+                                            </TableRow>
 
-                    </List>
+                                        ))}
+                                    </TableBody>
+                            </Table>
+                        </TableContainer>
+                    }
+
                 </div>
             </div>
         )
