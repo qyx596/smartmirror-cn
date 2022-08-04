@@ -1,8 +1,12 @@
 import React, {Component} from "react";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
-import {CircularProgress, Fade, Icon, List, ListItem, ListItemText} from "@mui/material";
+import {CircularProgress, Fade, List, ListItem, ListItemText} from "@mui/material";
+
+import "./Weather.css"
 import "../assets/font/qweather-icons.css"
+import {LeavesTwo} from "@icon-park/react";
+import configData from "../config.json"
 
 class Weather extends Component {
     constructor(props) {
@@ -21,14 +25,14 @@ class Weather extends Component {
         axios.all([
             axios.get("/weather/v7/weather/now", {
                 params: {
-                    key: "22f37fd5c5d348c9945b21840ff22023",
-                    location: "101230901"
+                    key: configData.weather.key,
+                    location: configData.weather.locationID
                 }
             }),
             axios.get("/weather/v7/air/now", {
                 params: {
-                    key: "22f37fd5c5d348c9945b21840ff22023",
-                    location: "101230901"
+                    key: configData.weather.key,
+                    location: configData.weather.locationID
                 }
             })
         ]).then(
@@ -50,10 +54,10 @@ class Weather extends Component {
     }
 
     refreshForecast() {
-        axios.get("/weather/v7/weather/3d", {
+        axios.get("/weather/v7/weather/7d", {
             params: {
-                key: "22f37fd5c5d348c9945b21840ff22023",
-                location: "101230901"
+                key: configData.weather.key,
+                location: configData.weather.locationID
             }
         }).then(
             res => {
@@ -101,10 +105,10 @@ class Weather extends Component {
                 }}>
                     {!this.state.currentsuccess ? <CircularProgress color="inherit"/> :
                         <Fade in={true} timeout={2000}>
-                            <Grid container spacing={0}>
+                            <Grid container>
                                 <Grid item xs>
-                                    <div style={{textAlign: "center"}}>
-                                        <div style={{textAlign: "center"}}>
+                                    <div>
+                                        <div>
                                             <i className={"qi-" + this.state.iconID} style={{fontSize: "3em"}}></i>
                                         </div>
                                         <div>
@@ -113,19 +117,22 @@ class Weather extends Component {
                                     </div>
                                 </Grid>
                                 <Grid item xs>
-                                    <div style={{textAlign: "center"}}>
-                                        <Icon sx={{color: this.aqiBadge(), fontSize: "3.5em"}}>eco</Icon>
-                                        <div style={{marginTop: "0.4em"}}>
-                                            <b style={{fontSize: "1.4em"}}>AQI: {this.state.aqi}</b>
+                                    <div>
+                                        <div>
+                                            <LeavesTwo theme="filled" size="3.5em" fill={this.aqiBadge()}/>
+                                        </div>
+                                        <div style={{marginTop: "0.1em"}}>
+                                            <b style={{fontSize: "1.5em"}}>AQI: {this.state.aqi}</b>
                                         </div>
                                     </div>
                                 </Grid>
                                 <Grid item xs>
-                                    <div style={{textAlign: "center"}}>
+                                    <div>
                                         <div style={{
                                             fontSize: "2em",
                                             marginTop: "0.4em",
-                                            marginBottom: "0.26em"
+                                            marginBottom: "0.26em",
+                                            fontWeight: "bold"
                                         }}>{this.state.temp}℃
                                         </div>
                                         <b style={{fontSize: "1.4em"}}>气温</b>
@@ -139,8 +146,8 @@ class Weather extends Component {
                     {!this.state.foresuccess ? <CircularProgress color="inherit"/> :
                         <div>
                             <List disablePadding>
-                                {this.state.forecast.map(item => (
-                                    <ListItem disablePadding disableGutters>
+                                {this.state.forecast.map((item, index) => (
+                                    <ListItem disablePadding disableGutters key={index}>
                                         <ListItemText
                                             sx={{textAlign: "center"}}>{"周" + this.state.date.at(new Date(item.fxDate).getDay())}</ListItemText>
                                         <ListItemText sx={{textAlign: "center"}}>
@@ -170,7 +177,6 @@ class Weather extends Component {
                     {/*}}>更新时间: {this.state.foresuccess ? this.state.updateTime.toLocaleString() : "未知"}</span>*/}
                     {/*        </div>*/}
                         </div>
-
                     }
                 </div>
             </div>

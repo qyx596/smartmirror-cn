@@ -1,0 +1,12 @@
+{
+  "sentence": {
+    "type": ""
+  },
+  "weather": {
+    "locationID": "",
+    "key": ""
+  },
+  "covid19status": {
+    "province": ""
+  }
+}

@@ -1,5 +1,4 @@
 .top {
-    float: top;
     border: 1px solid white;
     height: 10vh;
     color: white;
@@ -14,11 +13,11 @@
 
 .bottom {
     position: fixed;
-    border: 1px solid white;
     color: white;
     height: 10vh;
     bottom: 0;
-    width: 99vw;
+    width: 80vw;
+    transform: translateX(12%);
 }
 
 .middle {

@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import axios from "axios";
-import {Badge, CircularProgress, Fade, Grid, Icon} from "@mui/material";
-
+import {CircularProgress, Fade, Grid} from "@mui/material";
+import {Caution, Coronavirus} from "@icon-park/react";
+import configData from "../config.json"
 
 class Covid19Status extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class Covid19Status extends Component {
             url: "/covid/nCoV/api/area",
             params: {
                 latest: 1,
-                province: "福建省"
+                province: configData.covid19status.province
             },
             method: 'get'
         }).then(
@@ -54,7 +55,7 @@ class Covid19Status extends Component {
             }
         ).catch(
             reason => {
-                this.setState({success: false});
+                // this.setState({success: false});
                 console.log(reason);
             }
         )
@@ -74,17 +75,20 @@ class Covid19Status extends Component {
     render() {
         return (
             <div>
-                <div style={{marginBottom: "6px", borderBottomStyle: "solid", borderBottomColor: "gray", borderBottomWidth: "1px", paddingBottom: "4px"}}>
-                    <Icon style={{display: "inline", verticalAlign: "middle", paddingBottom: "0.2em"}}>coronavirus</Icon>
-                    <b style={{fontSize: "1.3em"}}>全国疫情数据</b>
+                <div style={{marginBottom: "2px", borderBottomStyle: "solid", borderBottomColor: "gray", borderBottomWidth: "1px", paddingBottom: "4px", verticalAlign: "middle"}}>
+                    <Coronavirus theme="filled" size="22" fill="#ffffff" style={{verticalAlign: "-25%", display:"inline-block"}}/>
+                   <b style={{fontSize: "1.3em"}}> 全国疫情数据</b>
                 </div>
                 {this.state.inLocal === 0 ? null
                     :
                     <Fade in={true} timeout={2000}>
                         <div style={{borderBottomWidth: "1px", borderBottomStyle: "solid", borderBottomColor: "gray", marginBottom: "3px"}}>
                             <div style={{display: "inline-block"}}>
-                                <Icon style={{color: "#FFC300", float: "left"}}>warning</Icon>
-                                <b style={{float: "left", paddingTop: "0.2em"}}>福建现存确诊: {this.state.inLocal}</b>
+                                <Caution theme="multi-color" size="24" fill={['#FFC300' ,'#FFC300' ,'#333' ,'#43CCF8']} style={{display: "inline-block", verticalAlign: "-35%"}}/>
+                                {/*<Icon style={{color: "#FFC300", verticalAlign: "-30%", display:"inline-block"}}>warning</Icon>*/}
+                                <b> {configData.covid19status.province}现存确诊:
+                                    <div style={{display: "inline-block", verticalAlign: "-6%", fontSize: "1.1em"}}>{this.state.inLocal}</div>
+                                </b>
                             </div>
                         </div>
                     </Fade>

@@ -1,31 +1,40 @@
 import React from "react";
 import "./Home.css"
 import Clock from "../components/Clock";
-import Covid19Status from "../components/Covid19Status";
 import Weather from "../components/Weather";
-import Poem from "../components/Poem";
+import Sentence from "../components/Sentence";
 import Hot from "../components/Hot";
-
+import Covid19Status from "../components/Covid19Status";
+import News from "../components/News";
+import Finance from "../components/Finance";
 
 function Home() {
     return (
         <>
-            <div className={"top"}>
-                TOP
-            </div>
+            {/*<div className={"top"} id={"top"}>*/}
+            {/*    <Finance />*/}
+            {/*</div>*/}
             <div className={"side"} style={{float: "left"}}>
-                <Covid19Status />
-                <Hot />
+                <div style={{width: "80%"}}>
+                    <Covid19Status />
+                </div>
+                <br />
+                <div style={{width: "80%"}}>
+                    <Hot />
+                </div>
             </div>
-            <div className={"side"} style={{float: "right"}}>
-                <Clock />
-                <Weather />
+            <div className={"side"} style={{float: "right"}} id={"right"}>
+                <div style={{width: "20em", float: "right"}}>
+                    <Clock />
+                    <br />
+                    <Weather />
+                </div>
             </div>
-            <div className={"bottom"}>
-                BOTTOM
+            <div className={"bottom"} id={"bottom"}>
+                <News />
             </div>
-            <div className={"middle"}>
-                <Poem />
+            <div className={"middle"} id={"middle"}>
+                <Sentence />
             </div>
         </>
     );

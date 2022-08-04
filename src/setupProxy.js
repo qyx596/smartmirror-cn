@@ -25,10 +25,18 @@ const tenAPIProxy = {
 }
 
 const rssProxy = {
-    target: "https://blog.ethereum.org",
+    target: "http://www.people.com.cn/",
     changeOrigin: true,
     pathRewrite: {
         "/rss": ""
+    }
+}
+
+const SentenceProxy = {
+    target: "https://v1.hitokoto.cn",
+    changeOrigin: true,
+    pathRewrite: {
+        "/sentence": ""
     }
 }
 
@@ -48,5 +56,9 @@ module.exports = function(app) {
     app.use(
         '/rss',
         createProxyMiddleware(rssProxy)
+    );
+    app.use(
+        '/sentence',
+        createProxyMiddleware(SentenceProxy)
     )
 };

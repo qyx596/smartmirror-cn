@@ -2,15 +2,12 @@ import React, {Component} from "react";
 import axios from "axios";
 import {
     CircularProgress,
-    Divider,
-    List,
-    ListItem,
-    ListItemText, Paper,
     Table,
     TableBody,
     TableCell,
     TableContainer, TableRow
 } from "@mui/material";
+import {Weibo} from "@icon-park/react";
 
 class Hot extends Component {
     constructor(props) {
@@ -33,26 +30,33 @@ class Hot extends Component {
 
     componentDidMount() {
         this.freshHot();
+        this.hotID = setInterval(() => {
+            this.freshHot();
+        }, 1000 * 60 * 10);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.hotID);
     }
 
     render() {
         return (
             <div>
                 <div style={{borderBottomStyle: "solid", borderBottomColor: "gray", borderBottomWidth: "1px"}}>
-                    <b style={{fontSize: "1.3em"}}>微博热搜</b>
+                    <Weibo theme="outline" size="26" fill="#ffffff" style={{verticalAlign: "-35%"}} />
+                    <b style={{fontSize: "1.3em"}}> 微博热搜</b>
                 </div>
-                <div style={{textAlign: "center", marginTop: "0.6em"}}>
+                <div style={{textAlign: "center", marginTop: "0.2em"}}>
                     {!this.state.success ? <CircularProgress color="inherit"/> :
                         <TableContainer>
                             <Table size="small">
                                     <TableBody>
-                                        {this.state.data.map((item) => (
-                                            <TableRow>
-                                                <TableCell align={"center"} sx={{color: "white"}}>
+                                        {this.state.data.map((item, index) => (
+                                            <TableRow key={index}>
+                                                <TableCell align={"center"} sx={{color: "white", borderBottomColor: "gray", fontSize: "1em"}}>
                                                     {"#" + item.name + "#"}
                                                 </TableCell>
                                             </TableRow>
-
                                         ))}
                                     </TableBody>
                             </Table>

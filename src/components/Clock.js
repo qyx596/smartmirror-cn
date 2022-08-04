@@ -27,7 +27,7 @@ export default class Clock extends Component {
 
     render() {
         return (
-            <div style={{width: "20em"}}>
+            <div>
                 <div style={{textAlign: "center"}}>
                     <b style={{fontSize: "2em"}}>{this.state.time.getFullYear()}年{this.state.time.getMonth()+1}月{this.state.time.getDate()}日 星期{this.state.date.at(this.state.time.getDay())}</b>
                 </div>
