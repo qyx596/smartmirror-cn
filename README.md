@@ -22,4 +22,4 @@
 | covid19status.province | 指定地区是否有现存确诊(参考:https://lab.isaaclin.cn/nCoV/zh)                                              |
 
 ## 运行截图
-![image(https://github.com/qyx596/smartmirror-cn/blob/main/images/IMG_2829.JPG?raw=true)]
+![image](https://github.com/qyx596/smartmirror-cn/blob/main/images/IMG_2829.JPG?raw=true)
